@@ -1,10 +1,10 @@
 <template>   
 <div>     
     <section>
-          <case-card>
+          <base-card>
                <h2>{{ fullName }}</h2>
                <h3>${{ rate }}/hour</h3>
-          </case-card>
+          </base-card>
      </section>
 
      <section>

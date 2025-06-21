@@ -17,7 +17,7 @@
                     <label for="password">Passoword</label>
                     <input type="password" id="password" name="password" v-model.trim="password" />
                </div>
-               <p v-if="!formIsValid">Please enter a valid credentials</p>
+               <p v-if="!formIsValid" class="error">Please enter a valid credentials</p>
                <base-button>{{submitButtonCaption}}</base-button>
                <base-button type="button" mode="flat" @click="switchAuthMode">{{switchModeButtonCaption}}</base-button>
           </form>
@@ -64,12 +64,15 @@ export default {
                          email: this.email,
                          password: this.password
                     })
+                    
                } else {
                    await  this.$store.dispatch('signup', {
                          email: this.email,
                          password: this.password
-                    })
-               }
+                   })
+                  }
+                  const redirectUrl = '/' + (this.$route.query.redirect || 'coaches')
+                  this.$router.replace(redirectUrl)
              } catch (error) {
                   console.log(error);
                this.error = error.message || "Failed to authenticated Please try again."
@@ -125,6 +128,11 @@ textarea:focus {
   border-color: #3d008d;
   background-color: #faf6ff;
   outline: none;
+}
+
+.error {
+     text-align: center;
+     color: red;
 }
 
 </style>
